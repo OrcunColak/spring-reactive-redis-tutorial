@@ -1,26 +1,22 @@
 package com.colak.springreactiveredistutorial.stringvalue.opsforvalue;
 
-import com.redis.testcontainers.RedisContainer;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
-import org.testcontainers.junit.jupiter.Container;
-import org.testcontainers.junit.jupiter.Testcontainers;
-import org.testcontainers.utility.DockerImageName;
 import reactor.test.StepVerifier;
 
 @SpringBootTest
-@Testcontainers
+// Testcontainers does not work for some reason
+// @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 class OpsForValueServiceTest {
 
-    @Container
-    @ServiceConnection
-    private static final RedisContainer REDIS_CONTAINER = new RedisContainer(DockerImageName.parse("redis:latest"));
+    // @Container
+    // @ServiceConnection
+    // private static final RedisContainer REDIS_CONTAINER = new RedisContainer(DockerImageName.parse("redis:latest"));
 
     @Autowired
     private OpsForValueService opsForValueService;

@@ -1,6 +1,7 @@
 package com.colak.springreactiveredistutorial.stringvalue.config;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.ReactiveRedisConnectionFactory;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
@@ -34,7 +35,7 @@ public class ReactiveRedisConfig {
         return lettuceConnectionFactory;
     }
 
-    // @Bean
+    @Bean
     public ReactiveRedisTemplate<String, Object> reactiveRedisTemplate(ReactiveRedisConnectionFactory redisConnectionFactoryFirst) {
         RedisSerializationContext.RedisSerializationContextBuilder<String, Object> builder =
                 RedisSerializationContext.newSerializationContext(new StringRedisSerializer());

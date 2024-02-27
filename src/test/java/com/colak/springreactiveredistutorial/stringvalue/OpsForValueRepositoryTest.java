@@ -1,4 +1,4 @@
-package com.colak.springreactiveredistutorial.stringvalue.opsforvalue;
+package com.colak.springreactiveredistutorial.stringvalue;
 
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
@@ -12,21 +12,22 @@ import reactor.test.StepVerifier;
 // Testcontainers does not work for some reason
 // @Testcontainers
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class OpsForValueServiceTest {
+class OpsForValueRepositoryTest {
 
     // @Container
     // @ServiceConnection
     // private static final RedisContainer REDIS_CONTAINER = new RedisContainer(DockerImageName.parse("redis:latest"));
 
     @Autowired
-    private OpsForValueService opsForValueService;
+    private OpsForValueRepository<String, String> opsForValueRepository;
+
 
     @Test
     @Order(1)
     void testSet() {
         String key = "key";
         String value = "value";
-        StepVerifier.create(opsForValueService.set(key, value))
+        StepVerifier.create(opsForValueRepository.set(key, value))
                 .expectNext(true) // Expect the result
                 .verifyComplete(); // Verify that the operation is completed
     }
@@ -37,7 +38,7 @@ class OpsForValueServiceTest {
         String key = "key";
         String expectedValue = "value";
 
-        StepVerifier.create(opsForValueService.get(key))
+        StepVerifier.create(opsForValueRepository.get(key))
                 .expectNext(expectedValue) // Expect the result
                 .verifyComplete(); // Verify that the operation is completed
 
@@ -49,7 +50,7 @@ class OpsForValueServiceTest {
     void testSetIfAbsent() {
         String key = "key";
         String value = "value";
-        StepVerifier.create(opsForValueService.setIfAbsent(key, value))
+        StepVerifier.create(opsForValueRepository.setIfAbsent(key, value))
                 .expectNext(false) // Expect the result
                 .verifyComplete(); // Verify that the operation is completed
     }

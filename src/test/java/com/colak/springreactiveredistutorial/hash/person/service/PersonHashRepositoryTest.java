@@ -13,10 +13,10 @@ import java.time.LocalDate;
 
 @SpringBootTest
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
-class PersonHashOperationsServiceTest {
+class PersonHashRepositoryTest {
 
     @Autowired
-    private PersonHashOperationsService personHashOperationsService;
+    private PersonHashRepository personHashRepository;
 
     private final LocalDate birthDate = LocalDate.of(1976, 2, 6);
     private final Person person = new Person(1L, "John", "Doe", birthDate);
@@ -24,9 +24,9 @@ class PersonHashOperationsServiceTest {
     @Test
     @Order(1)
     void testPut() {
-        personHashOperationsService.remove(person.getId()).block();
+        personHashRepository.remove(person.getId()).block();
 
-        StepVerifier.create(personHashOperationsService.put(person))
+        StepVerifier.create(personHashRepository.put(person.getId(), person))
                 .expectNext(true) // Expect the result
                 .verifyComplete(); // Verify that the operation is completed
     }
@@ -34,7 +34,7 @@ class PersonHashOperationsServiceTest {
     @Test
     @Order(2)
     void testGet() {
-        StepVerifier.create(personHashOperationsService.get(person.getId()))
+        StepVerifier.create(personHashRepository.get(person.getId()))
                 .expectNext(person) // Expect the result
                 .verifyComplete(); // Verify that the operation is completed
     }

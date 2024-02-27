@@ -23,7 +23,11 @@ public class ReactiveRedisConfig {
     // how to create multiple redis connections
     // @Bean(name = "redisConnectionFactoryFirst")
     public LettuceConnectionFactory redisConnectionFactoryFirst() {
+        // Same as
+        // return new LettuceConnectionFactory(new RedisStandaloneConfiguration(redisHost, redisPort));
         LettuceConnectionFactory lettuceConnectionFactory = new LettuceConnectionFactory(redisHost, redisPort);
+
+
         lettuceConnectionFactory.setDatabase(14);
         return lettuceConnectionFactory;
     }

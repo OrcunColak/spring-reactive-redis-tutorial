@@ -1,4 +1,4 @@
-package com.colak.springreactiveredistutorial.hash.person.service;
+package com.colak.springreactiveredistutorial.hash.person.repository;
 
 import com.colak.springreactiveredistutorial.hash.person.model.Person;
 import org.junit.jupiter.api.MethodOrderer;

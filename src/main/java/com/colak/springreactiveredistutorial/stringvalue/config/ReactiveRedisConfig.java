@@ -37,10 +37,11 @@ public class ReactiveRedisConfig {
 
     @Bean
     public ReactiveRedisTemplate<String, Object> reactiveRedisTemplate(ReactiveRedisConnectionFactory redisConnectionFactoryFirst) {
+        // key serializer is string
         RedisSerializationContext.RedisSerializationContextBuilder<String, Object> builder =
                 RedisSerializationContext.newSerializationContext(new StringRedisSerializer());
 
-        // Value serializer
+        // Value serializer is json
         GenericJackson2JsonRedisSerializer genericJackson2JsonRedisSerializer = new GenericJackson2JsonRedisSerializer();
         builder.value(genericJackson2JsonRedisSerializer);
 
